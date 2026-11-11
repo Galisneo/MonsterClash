@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Pantalla de recuperar contraseña (RecuperarActivity). Mismo estilo que el
+  login: fondo degradado, panel translúcido y campos con el estilo CampoTexto.
+
+  Los tres pasos van en la MISMA pantalla, cada uno en su LinearLayout
+  (paso_1, paso_2, paso_3); RecuperarActivity enseña uno y esconde los otros.
+  El botón de acción es el mismo para los tres (cambia el texto) y lleva la
+  ruedecita encima mientras se calculan los hashes. Debajo, "Volver".
+  Los ids llevan el prefijo rec_ porque esta pantalla repite los mismos campos
+  que el login (usuario, contraseña, respuesta, texto de error, botón
+  principal) y así en el código se distingue de un vistazo de cuál se habla;
+  las pantallas que no comparten campos con ninguna otra van sin prefijo.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_menu"
+    android:fillViewport="true"
+    tools:context=".pantallas.RecuperarActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingStart="@dimen/margen_pantalla"
+        android:paddingEnd="@dimen/margen_pantalla"
+        android:paddingTop="48dp"
+        android:paddingBottom="@dimen/margen_pantalla">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rec_titulo"
+            android:textColor="@color/texto_blanco"
+            android:textSize="@dimen/texto_titulo_secundario"
+            android:textStyle="bold"
+            android:shadowColor="@color/sombra_texto"
+            android:shadowDx="0"
+            android:shadowDy="4"
+            android:shadowRadius="12"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/rec_texto_paso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/texto_tenue"
+            android:textSize="@dimen/texto_subtitulo"
+            android:paddingTop="6dp"
+            tools:text="Paso 1 de 3" />
+
+        <!-- Criatura de adorno, más pequeña que en el login -->
+        <com.juego.combates.vistas.VistaCriatura
+            android:id="@+id/criatura_recuperar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/panel_translucido"
+            android:padding="18dp">
+
+            <!-- Los textos del panel llevan 4dp a cada lado para alinearse con
+                 el texto de dentro de los campos -->
+            <TextView
+                android:id="@+id/rec_subtitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_claro"
+                android:textSize="@dimen/texto_normal"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="12dp"
+                tools:text="Escribe tu nombre de usuario" />
+
+            <!-- Paso 1: usuario -->
+            <LinearLayout
+                android:id="@+id/paso_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/rec_campo_usuario"
+                    style="@style/CampoTexto"
+                    android:hint="@string/login_hint_usuario"
+                    android:inputType="text|textNoSuggestions"
+                    android:maxLength="20"
+                    android:imeOptions="actionDone"
+                    android:autofillHints="username" />
+            </LinearLayout>
+
+            <!-- Paso 2: pregunta y respuesta -->
+            <LinearLayout
+                android:id="@+id/paso_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/rec_texto_de_quien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/texto_tenue"
+                    android:textSize="@dimen/texto_pequeno"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    tools:text="Pregunta de seguridad de ana:" />
+
+                <TextView
+                    android:id="@+id/rec_texto_pregunta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/texto_blanco"
+                    android:textSize="@dimen/texto_campo"
+                    android:textStyle="bold"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="12dp"
+                    tools:text="¿Cómo se llamaba tu primera mascota?" />
+
+                <EditText
+                    android:id="@+id/rec_campo_respuesta"
+                    style="@style/CampoTexto"
+                    android:hint="@string/login_hint_respuesta"
+                    android:inputType="text|textNoSuggestions"
+                    android:importantForAutofill="no"
+                    android:maxLength="60"
+                    android:imeOptions="actionDone" />
+            </LinearLayout>
+
+            <!-- Paso 3: contraseña nueva dos veces -->
+            <LinearLayout
+                android:id="@+id/paso_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <EditText
+                    android:id="@+id/rec_campo_password"
+                    style="@style/CampoTexto"
+                    android:hint="@string/rec_hint_password_nueva"
+                    android:inputType="textPassword"
+                    android:maxLength="72"
+                    android:imeOptions="actionNext"
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints="newPassword" />
+
+                <EditText
+                    android:id="@+id/rec_campo_password2"
+                    style="@style/CampoTexto"
+                    android:hint="@string/rec_hint_password_repetir"
+                    android:inputType="textPassword"
+                    android:maxLength="72"
+                    android:imeOptions="actionDone"
+                    android:autofillHints="newPassword" />
+
+                <!-- el texto lo pone RecuperarActivity: login_reglas es una
+                     plantilla que se rellena con los límites de datos/Validador -->
+                <TextView
+                    android:id="@+id/rec_texto_reglas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/texto_gris"
+                    android:textSize="@dimen/texto_pequeno"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:paddingTop="8dp"
+                    tools:text="Usuario: 3–20 letras, números o _ · Contraseña: 8–72 con letra y número" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/rec_texto_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_error"
+                android:textSize="@dimen/texto_ayuda"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="8dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="Respuesta incorrecta" />
+
+            <!-- Botón de acción (Continuar / Comprobar / Cambiar contraseña) con la ruedecita encima -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/alto_boton"
+                android:layout_marginTop="14dp">
+
+                <Button
+                    android:id="@+id/rec_boton_accion"
+                    style="@style/BotonPrimario"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/rec_continuar"
+                    android:backgroundTint="@color/boton_verde" />
+
+                <ProgressBar
+                    android:id="@+id/rec_progreso"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:elevation="8dp"
+                    android:indeterminateTint="@color/texto_blanco"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/rec_boton_volver"
+            style="@style/BotonContorno"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/alto_boton"
+            android:layout_marginTop="14dp"
+            android:text="@string/rec_volver" />
+    </LinearLayout>
+</ScrollView>

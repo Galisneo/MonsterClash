@@ -1,0 +1,43 @@
+// Módulo de la app: aquí van el SDK, el identificador del paquete y las opciones de compilación.
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.juego.combates'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.juego.combates"
+        minSdk 24
+        // minSdk 24 = Android 7.0 (me permite usar getColor() de la Activity, API 23+)
+        // targetSdk 34 a propósito: desde el 35 Android obliga a dibujar bajo las
+        // barras del sistema y tendría que gestionar los márgenes a mano.
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // Avisos de lint que no quiero ver porque son decisiones tomadas a propósito:
+    // OldTargetApi por el targetSdk 34 (la justificación está arriba, en
+    // defaultConfig), y los dos de versiones porque no hay dependencias que
+    // actualizar y la versión de AGP es la misma que usa Android Studio.
+    lint {
+        disable 'OldTargetApi', 'GradleDependency', 'AndroidGradlePluginVersion'
+    }
+}
+
+// Vacío a propósito: solo el SDK de Android, sin AndroidX ni librerías externas.
+dependencies {
+}

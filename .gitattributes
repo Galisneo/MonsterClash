@@ -1,0 +1,14 @@
+# Normaliza saltos de línea de forma coherente entre sistemas.
+* text=auto
+
+# El wrapper de Gradle: el script Unix necesita LF; el .bat necesita CRLF.
+gradlew        text eol=lf
+*.sh           text eol=lf
+gradlew.bat    text eol=crlf
+*.bat          text eol=crlf
+
+# Binarios: no tocar.
+*.jar          binary
+*.apk          binary
+*.png          binary
+*.jpg          binary

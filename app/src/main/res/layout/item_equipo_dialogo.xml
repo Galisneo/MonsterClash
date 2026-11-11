@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Una criatura del equipo dentro del diálogo de cambio: dibujo, nombre, chip
+  del tipo, barra de vida con números y su estado (lista / en combate /
+  debilitada). Las que no se pueden elegir salen atenuadas y sin clic.
+  La cabecera (vista_criatura, fondo_criatura, nombre y tipo) comparte ids con
+  item_criatura.xml: la rellena pantallas/TarjetaCriatura para las dos.
+  baselineAligned="false" en la raíz porque el hijo con peso es un LinearLayout
+  y no un texto: no hay línea base que alinear.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:baselineAligned="false"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:padding="10dp"
+    android:background="@drawable/tarjeta">
+
+    <FrameLayout
+        android:layout_width="@dimen/tam_criatura_dialogo"
+        android:layout_height="@dimen/tam_criatura_dialogo">
+
+        <View
+            android:id="@+id/fondo_criatura"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.22"
+            android:background="@drawable/circulo_suave" />
+
+        <com.juego.combates.vistas.VistaCriatura
+            android:id="@+id/vista_criatura"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/nombre"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_blanco"
+                android:textSize="@dimen/texto_nombre_dialogo"
+                android:textStyle="bold"
+                tools:text="Acuarin" />
+
+            <TextView
+                android:id="@+id/tipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:background="@drawable/chip_tipo"
+                android:textColor="@color/texto_blanco"
+                android:textSize="@dimen/texto_mini"
+                android:textStyle="bold"
+                tools:text="💧 Agua"
+                tools:backgroundTint="#FF3B82F6" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="6dp">
+
+            <ProgressBar
+                android:id="@+id/barra_hp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="8dp"
+                android:progressDrawable="@drawable/barra_stat"
+                tools:progress="70" />
+
+            <TextView
+                android:id="@+id/texto_hp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/texto_claro"
+                android:textSize="@dimen/texto_pequeno"
+                tools:text="130 / 185 PS" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/estado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/texto_tenue"
+            android:textSize="@dimen/texto_pequeno"
+            tools:text="Lista para salir" />
+    </LinearLayout>
+</LinearLayout>

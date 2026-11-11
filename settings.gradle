@@ -1,0 +1,28 @@
+// settings.gradle: le dice a Gradle de dónde bajar el plugin de Android y las
+// dependencias, y qué módulos forman el proyecto (solo ':app').
+//
+// - pluginManagement: repositorios donde buscar los plugins (el de Android, AGP).
+// - dependencyResolutionManagement: repositorios de las dependencias de los
+//   módulos. Con FAIL_ON_PROJECT_REPOS la compilación falla si algún módulo
+//   declara sus propios repositorios: así todos salen de aquí y de ningún sitio más.
+// - google(): el repositorio de Google, donde vive el plugin de Android.
+// - mavenCentral(): el repositorio general de Java; hoy no bajo nada de él porque
+//   el proyecto no tiene dependencias, pero es el estándar y no molesta.
+// - gradlePluginPortal(): el portal oficial de plugins de Gradle, por si algún
+//   día hace falta uno que no sea de Google.
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "JuegoCombates"
+include ':app'

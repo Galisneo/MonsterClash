@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Contenido del diálogo de fin de combate: la criatura decisiva dibujada con
+  VistaCriatura sobre una capa de confeti (VistaConfeti, solo activa en
+  victoria), el título y el mensaje. Los tres botones los añade CombateActivity
+  con el AlertDialog.Builder.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingTop="28dp"
+    android:paddingBottom="8dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="132dp">
+
+        <com.juego.combates.vistas.VistaConfeti
+            android:id="@+id/fin_confeti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.juego.combates.vistas.VistaCriatura
+            android:id="@+id/fin_criatura"
+            android:layout_width="126dp"
+            android:layout_height="126dp"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/fin_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/texto_blanco"
+        android:fontFamily="sans-serif-black"
+        android:textSize="@dimen/texto_titulo_dialogo"
+        tools:text="¡Victoria!" />
+
+    <TextView
+        android:id="@+id/fin_mensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:textColor="@color/texto_tenue"
+        android:textSize="@dimen/texto_subtitulo"
+        tools:text="¡Has derrotado al entrenador rival!" />
+</LinearLayout>

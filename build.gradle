@@ -1,0 +1,5 @@
+// build.gradle raíz: solo declaro el plugin de Android. "apply false" porque se
+// aplica en app/build.gradle. AGP 9.3.1 es compatible con Android Studio del usuario.
+plugins {
+    id 'com.android.application' version '9.3.1' apply false
+}

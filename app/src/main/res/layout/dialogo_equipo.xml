@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Contenido del diálogo de cambio de criatura. Título, una línea de ayuda, la
+  lista con una tarjeta por criatura del equipo (item_equipo_dialogo.xml, la
+  rellena CombateActivity) y el botón de cancelar (oculto si el cambio es
+  obligatorio tras un KO).
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/dlg_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/texto_blanco"
+        android:textSize="@dimen/texto_titulo_dialogo_equipo"
+        android:textStyle="bold"
+        tools:text="¿A quién envías?" />
+
+    <TextView
+        android:id="@+id/dlg_subtitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/texto_tenue"
+        android:textSize="@dimen/texto_ayuda"
+        tools:text="Cambiar gasta el turno: el rival atacará a la que entre." />
+
+    <LinearLayout
+        android:id="@+id/dlg_lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/dlg_cancelar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/dlg_cancelar"
+        android:textColor="@color/texto_claro"
+        android:textAllCaps="false"
+        android:background="@drawable/boton_contorno" />
+</LinearLayout>

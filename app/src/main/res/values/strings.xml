@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Textos de la interfaz. Los que llevan %1$d, %2$s... son plantillas que se
+  rellenan desde Java con getString(R.string.x, valor1, valor2...).
+  Los mensajes del combate ("¡X usa Y!") no están aquí: los genera Batalla.java,
+  que no depende de Android.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Monster Clash</string>
+
+    <!-- Menú -->
+    <string name="menu_subtitulo">Combates por turnos · 6 criaturas · equipos de 3</string>
+    <string name="menu_elegir">⚔️  Elegir equipo y combatir</string>
+    <string name="menu_rapido">🎲  Combate rápido</string>
+    <string name="menu_como_jugar">❓  Cómo jugar</string>
+    <string name="menu_pie">Java · sin dependencias externas</string>
+
+    <!-- Menú: fila de usuario (saludo, estadísticas y botón de sesión) -->
+    <string name="menu_hola">Hola, %1$s</string>
+    <string name="menu_invitado">Invitado</string>
+    <string name="menu_estadisticas">🏆 %1$d · 💀 %2$d</string>
+    <string name="menu_cerrar_sesion">Cerrar sesión</string>
+    <string name="menu_iniciar_sesion">Iniciar sesión</string>
+
+    <!-- Ayuda -->
+    <string name="ayuda_titulo">Cómo jugar</string>
+    <string name="ayuda_texto">Tu equipo de 3 criaturas contra el del rival.\n\n• Elige uno de los 4 movimientos de tu criatura. La más rápida golpea primero.\n\n• Cada tipo (Fuego, Agua, Planta…) es fuerte o débil contra otros: fíjate en los avisos de eficacia.\n\n• Los movimientos gastan PP. Si se agotan todos, solo queda Forcejeo.\n\n• El botón Equipo cambia de criatura (gasta el turno). Si la tuya cae, el cambio es gratis.\n\nGanas cuando las 3 criaturas rivales se debilitan.</string>
+    <string name="ayuda_entendido">Entendido</string>
+
+    <!-- Selección de equipo -->
+    <string name="seleccion_titulo">Elige tu equipo</string>
+    <string name="seleccion_subtitulo">Toca tres criaturas para formar tu equipo</string>
+    <string name="seleccion_tu_equipo">Tu equipo</string>
+    <string name="seleccion_contador">%1$d / %2$d</string>
+    <string name="seleccion_combatir">¡Combatir!</string>
+    <!-- no es un plural: siempre se llama con 3 (el tamaño fijo del equipo) -->
+    <string name="seleccion_tope" tools:ignore="PluralsCandidate">Ya tienes %1$d elegidas. Quita una primero.</string>
+    <string name="etiqueta_tipo">%1$s %2$s</string>
+    <string name="etiqueta_stat">%1$s %2$d</string>
+    <string name="stat_ps">PS</string>
+    <string name="stat_atq">ATQ</string>
+    <string name="stat_def">DEF</string>
+    <string name="stat_vel">VEL</string>
+
+    <!-- separador entre los nombres de los movimientos de la tarjeta; va entre comillas para que conserve los espacios -->
+    <string name="seleccion_separador_movimientos">" · "</string>
+
+    <!-- Combate -->
+    <string name="combate_boton_equipo">🔄  Equipo</string>
+    <string name="combate_boton_nueva">↻  Nueva batalla</string>
+    <!-- botones de movimiento en dos líneas: título (icono y nombre) y detalle (tipo y PP) -->
+    <string name="combate_mov_titulo">%1$s %2$s</string>
+    <string name="combate_mov_detalle">%1$s · PP %2$d/%3$d</string>
+    <string name="combate_forcejeo_titulo">😤 Forcejeo</string>
+    <string name="combate_forcejeo_detalle">Normal · sin PP</string>
+    <!-- paneles de vida (vistas/PanelCriatura.java) y tarjetas del diálogo de equipo -->
+    <string name="combate_panel_nivel">Nv %1$d</string>
+    <string name="combate_panel_ps">%1$d / %2$d PS</string>
+    <!-- emoji que va delante de cada burbuja del chat según lo que cuenta el evento
+         (CombateActivity.iconoMensaje); llevan el espacio dentro de las comillas -->
+    <string name="combate_icono_golpe">"💥 "</string>
+    <string name="combate_icono_critico">"⭐ "</string>
+    <string name="combate_icono_eficaz">"✨ "</string>
+    <string name="combate_icono_poco_eficaz">"💤 "</string>
+    <string name="combate_icono_curacion">"💚 "</string>
+    <string name="combate_icono_ko">"💀 "</string>
+    <string name="combate_icono_fallo">"❌ "</string>
+    <string name="combate_icono_forcejeo">"😤 "</string>
+    <string name="combate_icono_cambio">"🔄 "</string>
+    <string name="combate_icono_reto">"⚔️ "</string>
+
+    <!-- Diálogo de cambio de criatura (todo con prefijo dlg_equipo_; dlg_cancelar es su botón) -->
+    <string name="dlg_equipo_titulo">¿A quién envías?</string>
+    <string name="dlg_equipo_ko_titulo">¡Elige tu siguiente criatura!</string>
+    <string name="dlg_equipo_sub_voluntario">Cambiar gasta el turno: el rival atacará a la que entre.</string>
+    <string name="dlg_equipo_sub_ko">Tu criatura se ha debilitado. El cambio es gratis.</string>
+    <string name="dlg_equipo_estado_en_combate">En combate</string>
+    <string name="dlg_equipo_estado_debilitada">Debilitada</string>
+    <string name="dlg_equipo_estado_lista">Lista para salir</string>
+    <string name="dlg_cancelar">Cancelar</string>
+    <string name="dlg_equipo_sin_reservas">No tienes más criaturas disponibles.</string>
+
+    <!-- Diálogo de fin -->
+    <string name="dlg_victoria_titulo">¡Victoria!</string>
+    <string name="dlg_victoria_msg">¡Has derrotado al entrenador rival!</string>
+    <string name="dlg_derrota_titulo">Derrota…</string>
+    <string name="dlg_derrota_msg">Todas tus criaturas se han debilitado.</string>
+    <string name="dlg_otra_vez">Otra vez</string>
+    <string name="dlg_cambiar_equipo">Cambiar equipo</string>
+    <string name="dlg_menu">Menú</string>
+
+    <string name="dlg_nueva_titulo">Nueva batalla</string>
+    <string name="dlg_nueva_msg">¿Abandonar este combate y empezar otro con equipos nuevos?</string>
+    <string name="dlg_si">Sí</string>
+    <string name="dlg_no">No</string>
+
+    <!-- Inicio de sesión (todo en el móvil, con SQLite) -->
+    <string name="login_subtitulo">Entra con tu cuenta para guardar tus partidas</string>
+    <string name="login_pestana_entrar">Entrar</string>
+    <string name="login_pestana_crear">Crear cuenta</string>
+    <string name="login_hint_usuario">Usuario</string>
+    <string name="login_hint_email">Email (opcional)</string>
+    <string name="login_hint_password">Contraseña</string>
+    <string name="login_ver_password">👁</string>
+    <string name="login_boton_entrar">Entrar</string>
+    <string name="login_boton_crear">Crear cuenta y entrar</string>
+    <string name="login_invitado">Jugar sin cuenta</string>
+    <string name="login_olvide">¿Has olvidado tu contraseña?</string>
+    <string name="login_pregunta_etiqueta">Pregunta de seguridad (para recuperar la contraseña)</string>
+    <string name="login_hint_respuesta">Respuesta</string>
+    <!-- las reglas y los errores de longitud son plantillas: los números los pone
+         datos/Validador (USUARIO_MIN/MAX, PASSWORD_MIN/MAX, RESPUESTA_MIN/MAX), así el
+         texto y la comprobación no pueden decir cosas distintas. No son plurales: los
+         mínimos son de 2 para arriba, nunca sale "1 caracteres" -->
+    <string name="login_reglas" tools:ignore="PluralsCandidate">Usuario: %1$d–%2$d letras, números o _ · Contraseña: %3$d–%4$d con letra y número</string>
+    <string name="login_error_usuario" tools:ignore="PluralsCandidate">El usuario debe tener de %1$d a %2$d caracteres: letras, números o _</string>
+    <string name="login_error_email">El email no tiene un formato válido</string>
+    <string name="login_error_password" tools:ignore="PluralsCandidate">La contraseña debe tener de %1$d a %2$d caracteres, con al menos una letra y un número</string>
+    <string name="login_error_respuesta" tools:ignore="PluralsCandidate">La respuesta debe tener de %1$d a %2$d caracteres</string>
+    <string name="login_error_incorrecto">Usuario o contraseña incorrectos.</string>
+    <!-- plural: con 1 minuto no puede decir "minutos"; se usa con getQuantityString -->
+    <plurals name="login_error_bloqueado">
+        <item quantity="one">Demasiados intentos. Espera %1$d minuto.</item>
+        <item quantity="other">Demasiados intentos. Espera %1$d minutos.</item>
+    </plurals>
+    <string name="login_error_usuario_existe">Ese usuario ya existe</string>
+    <string name="login_error_email_existe">Ese email ya está registrado</string>
+    <string name="login_error_bd">No se ha podido guardar. Inténtalo otra vez.</string>
+    <!-- cuando falla una comprobación (entrar, responder la pregunta), donde no se guardaba nada -->
+    <string name="login_error_generico">Ha ocurrido un error. Inténtalo otra vez.</string>
+    <string name="login_cuenta_creada">Cuenta creada, entrando…</string>
+    <string name="login_pie">Tus datos se guardan solo en este móvil</string>
+
+    <!-- Recuperar contraseña -->
+    <string name="rec_titulo">Recuperar contraseña</string>
+    <string name="rec_paso">Paso %1$d de 3</string>
+    <string name="rec_sub_usuario">Escribe tu nombre de usuario</string>
+    <string name="rec_sub_pregunta">Responde a tu pregunta de seguridad</string>
+    <string name="rec_sub_password">Elige una contraseña nueva</string>
+    <string name="rec_pregunta_de">Pregunta de seguridad de %1$s:</string>
+    <string name="rec_hint_password_nueva">Nueva contraseña</string>
+    <string name="rec_hint_password_repetir">Repite la contraseña</string>
+    <string name="rec_continuar">Continuar</string>
+    <string name="rec_comprobar">Comprobar</string>
+    <string name="rec_cambiar">Cambiar contraseña</string>
+    <string name="rec_volver">Volver</string>
+    <string name="rec_error_respuesta">Respuesta incorrecta.</string>
+    <string name="rec_error_no_coinciden">Las dos contraseñas no coinciden</string>
+    <string name="rec_cambiada">Contraseña cambiada</string>
+    <!-- por si el índice de la pregunta no cuadra con el array (no debería pasar) -->
+    <string name="rec_pregunta_desconocida">Pregunta no disponible</string>
+    <!-- el permiso para cambiar la contraseña caduca a los 10 minutos de acertar la pregunta -->
+    <string name="rec_error_caducado">Ha pasado demasiado tiempo. Responde otra vez a la pregunta.</string>
+</resources>

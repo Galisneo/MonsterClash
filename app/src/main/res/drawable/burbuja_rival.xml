@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Burbuja del chat para los mensajes del rival (a la derecha, roja). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/burbuja_rival" />
+    <corners
+        android:topLeftRadius="16dp"
+        android:topRightRadius="16dp"
+        android:bottomRightRadius="4dp"
+        android:bottomLeftRadius="16dp" />
+</shape>

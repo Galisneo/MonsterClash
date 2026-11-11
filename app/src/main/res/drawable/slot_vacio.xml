@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ranura del equipo sin rellenar: círculo con borde discontinuo. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/relleno_cristal" />
+    <stroke
+        android:width="2dp"
+        android:color="@color/slot_borde"
+        android:dashWidth="6dp"
+        android:dashGap="4dp" />
+</shape>

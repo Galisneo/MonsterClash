@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Preguntas de seguridad para recuperar la contraseña. En la base de datos
+  guardo solo el ÍNDICE (0-5), así que el orden de esta lista no se puede
+  cambiar: si añado preguntas, van al final.
+-->
+<resources>
+    <string-array name="preguntas_seguridad">
+        <item>¿Cómo se llamaba tu primera mascota?</item>
+        <item>¿En qué ciudad naciste?</item>
+        <item>¿Cuál es el nombre de tu mejor amigo de la infancia?</item>
+        <item>¿Cuál era tu comida favorita de pequeño?</item>
+        <item>¿Cómo se llamaba tu primer colegio?</item>
+        <item>¿Cuál es tu videojuego favorito?</item>
+    </string-array>
+</resources>

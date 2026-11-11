@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Pantalla de combate (CombateActivity). De arriba a abajo: escenario
+  (VistaBatalla, dibujada con Canvas), el chat del combate, dos filas de
+  botones de movimiento y la fila de Equipo / Nueva batalla.
+  El escenario lleva layout_height="0dp" + layout_weight="1" para ocupar lo
+  que sobre. El chat es un LinearLayout vacío dentro de un ScrollView:
+  ChatCombate (en vistas/) va añadiendo una burbuja (TextView) por mensaje.
+  El texto y color de los botones de movimiento los pone CombateActivity en
+  cada turno (a través de vistas/EstiloBotonMovimiento); los tools:text son
+  solo para la vista previa.
+  Los cuatro botones de movimiento comparten el estilo BotonMovimiento de
+  themes.xml (letra de 14sp, dos líneas, sombra de 3dp) y aquí solo llevan id y
+  tools:text; no usan BotonPrimario porque EstiloBotonMovimiento les cambia el
+  fondo por completo. Los dos de abajo van sin estilo propio porque son
+  distintos entre sí. Las filas llevan tools:ignore="ButtonStyle" porque no son
+  barras de botones estándar de Android sino botones propios.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondo_pantalla"
+    tools:context=".pantallas.CombateActivity">
+
+    <com.juego.combates.vistas.VistaBatalla
+        android:id="@+id/vista_batalla"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Chat del combate -->
+    <ScrollView
+        android:id="@+id/scroll_log"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/alto_log"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/panel_log"
+        android:elevation="4dp"
+        android:padding="6dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/lista_mensajes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="4dp">
+
+            <!-- Tres burbujas de muestra (narrador, rival y jugador) solo para la
+                 vista previa: en el móvil van ocultas (visibility="gone") y
+                 ChatCombate.limpiar() las quita al empezar la primera batalla;
+                 las burbujas reales las crea ChatCombate una por mensaje -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/burbuja_neutral"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:textColor="@color/texto_tenue"
+                android:textSize="@dimen/texto_ayuda"
+                android:textStyle="italic"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="¡Un entrenador rival te desafía!" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/burbuja_rival"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textColor="@color/texto_claro"
+                android:textSize="@dimen/texto_normal"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="🔄 El rival envía a Rocardo." />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/burbuja_jugador"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textColor="@color/texto_claro"
+                android:textSize="@dimen/texto_normal"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="🔄 ¡Adelante, Fogarto!" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Fila 1 de movimientos (botones 0 y 1). Sin PP, solo queda visible el 0 con Forcejeo. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/alto_boton_mov"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        tools:ignore="ButtonStyle">
+
+        <Button
+            android:id="@+id/boton_mov_0"
+            style="@style/BotonMovimiento"
+            tools:text="🔥 Ascuas\nFuego · PP 25/25" />
+
+        <Button
+            android:id="@+id/boton_mov_1"
+            style="@style/BotonMovimiento"
+            tools:text="🔥 Llamarada\nFuego · PP 10/10" />
+    </LinearLayout>
+
+    <!-- Fila 2 de movimientos (botones 2 y 3) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/alto_boton_mov"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        tools:ignore="ButtonStyle">
+
+        <Button
+            android:id="@+id/boton_mov_2"
+            style="@style/BotonMovimiento"
+            tools:text="⚪ Mordisco\nNormal · PP 20/20" />
+
+        <Button
+            android:id="@+id/boton_mov_3"
+            style="@style/BotonMovimiento"
+            tools:text="⚪ Placaje\nNormal · PP 35/35" />
+    </LinearLayout>
+
+    <!-- Fila inferior: cambiar de criatura (gasta turno) y nueva batalla (pide confirmación) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/alto_boton"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:layout_marginBottom="6dp"
+        tools:ignore="ButtonStyle">
+
+        <Button
+            android:id="@+id/boton_equipo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="@string/combate_boton_equipo"
+            android:textColor="@color/texto_blanco"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:elevation="3dp"
+            android:stateListAnimator="@animator/boton_pulsado"
+            android:background="@drawable/boton_redondeado"
+            android:backgroundTint="@color/boton_azul" />
+
+        <Button
+            android:id="@+id/boton_nueva"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:text="@string/combate_boton_nueva"
+            android:textColor="@color/texto_claro"
+            android:textAllCaps="false"
+            android:stateListAnimator="@animator/boton_pulsado"
+            android:background="@drawable/boton_contorno" />
+    </LinearLayout>
+</LinearLayout>

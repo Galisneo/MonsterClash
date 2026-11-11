@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Tarjeta vertical de una criatura para la cuadrícula de selección: dibujo sobre
+  un círculo de su color, nombre, chip del tipo, cuatro barras de estadísticas
+  y sus movimientos. La insignia de la esquina enseña el orden en el equipo.
+  No es una pantalla: SeleccionActivity la infla 6 veces y rellena las vistas
+  con tarjeta.findViewById(), porque los ids se repiten en todas las tarjetas.
+  La cabecera (vista_criatura, fondo_criatura, nombre y tipo) comparte ids con
+  item_equipo_dialogo.xml: la rellena pantallas/TarjetaCriatura para las dos.
+  El fondo cambia a @drawable/tarjeta_seleccionada al elegirla.
+  Las cuatro filas de estadísticas usan los estilos EtiquetaStat y BarraStat
+  de themes.xml. Los tools:text son solo para la vista previa.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_columnWeight="1"
+    android:layout_gravity="fill_horizontal"
+    android:layout_margin="6dp"
+    android:background="@drawable/tarjeta"
+    android:elevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="12dp">
+
+        <FrameLayout
+            android:id="@+id/cabecera_criatura"
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            android:background="@drawable/panel_translucido">
+
+            <!-- emoji del tipo como marca de agua detrás de la criatura -->
+            <TextView
+                android:id="@+id/marca_agua_tipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:alpha="0.10"
+                android:textSize="@dimen/texto_marca_agua"
+                android:importantForAccessibility="no"
+                tools:text="🔥" />
+
+            <FrameLayout
+                android:layout_width="@dimen/tam_criatura_tarjeta"
+                android:layout_height="@dimen/tam_criatura_tarjeta"
+                android:layout_gravity="center">
+
+                <View
+                    android:id="@+id/fondo_criatura"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.22"
+                    android:background="@drawable/circulo_suave" />
+
+                <com.juego.combates.vistas.VistaCriatura
+                    android:id="@+id/vista_criatura"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/texto_blanco"
+            android:textSize="@dimen/texto_nombre"
+            android:textStyle="bold"
+            tools:text="Fogarto" />
+
+        <TextView
+            android:id="@+id/tipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:background="@drawable/chip_tipo"
+            android:textColor="@color/texto_blanco"
+            android:textSize="@dimen/texto_pequeno"
+            android:textStyle="bold"
+            tools:text="🔥 Fuego"
+            tools:backgroundTint="#FFE25822" />
+
+        <!-- Estadísticas: etiqueta + barra -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/texto_ps"
+                    style="@style/EtiquetaStat"
+                    tools:text="PS 175" />
+
+                <ProgressBar
+                    android:id="@+id/barra_ps"
+                    style="@style/BarraStat"
+                    tools:progress="80" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="3dp">
+
+                <TextView
+                    android:id="@+id/texto_atq"
+                    style="@style/EtiquetaStat"
+                    tools:text="ATQ 85" />
+
+                <ProgressBar
+                    android:id="@+id/barra_atq"
+                    style="@style/BarraStat"
+                    tools:progress="85" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="3dp">
+
+                <TextView
+                    android:id="@+id/texto_def"
+                    style="@style/EtiquetaStat"
+                    tools:text="DEF 70" />
+
+                <ProgressBar
+                    android:id="@+id/barra_def"
+                    style="@style/BarraStat"
+                    tools:progress="64" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="3dp">
+
+                <TextView
+                    android:id="@+id/texto_vel"
+                    style="@style/EtiquetaStat"
+                    tools:text="VEL 90" />
+
+                <ProgressBar
+                    android:id="@+id/barra_vel"
+                    style="@style/BarraStat"
+                    tools:progress="82" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/movimientos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/texto_gris"
+            android:textSize="@dimen/texto_mini"
+            tools:text="Ascuas · Llamarada · Mordisco · Placaje" />
+    </LinearLayout>
+
+    <!-- Insignia con el número de orden (oculta hasta que se elige) -->
+    <TextView
+        android:id="@+id/insignia"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:background="@drawable/insignia_numero"
+        android:textColor="@color/texto_blanco"
+        android:textSize="@dimen/texto_normal"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="1" />
+</FrameLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Colores de la interfaz en formato #AARRGGBB (AA = transparencia, FF opaco).
+  Los colores de cada criatura están en el enum Tipo.java porque son parte del
+  modelo, no de la interfaz; sus tonos de sombra, luz y acento (y el color de
+  botón por tipo) están en vistas/Paleta.java.
+  Cuando dos cosas comparten color a propósito (el final de los degradados y
+  el fondo, el borde de selección y el botón verde...) uso un alias @color/x
+  en vez de repetir el número, así si cambio uno cambian los dos.
+-->
+<resources>
+    <!-- Fondos -->
+    <color name="fondo_oscuro">#FF1B1E26</color>
+    <color name="fondo_panel">#FF262B35</color>
+    <color name="fondo_panel_borde">#FF394150</color>
+    <color name="menu_grad_arriba">#FF3B2A7A</color>
+    <color name="menu_grad_centro">#FF2B3A67</color>
+    <!-- los degradados terminan en el color del fondo para que empalmen con él -->
+    <color name="menu_grad_abajo">@color/fondo_oscuro</color>
+    <color name="pantalla_grad_arriba">#FF262C3B</color>
+    <color name="pantalla_grad_abajo">@color/fondo_oscuro</color>
+    <color name="panel_translucido">#22FFFFFF</color>
+    <color name="panel_translucido_borde">#33FFFFFF</color>
+
+    <!-- Cristal: rellenos y bordes blancos translúcidos de botones y ranuras -->
+    <color name="relleno_cristal">#14FFFFFF</color>
+    <color name="borde_cristal">#66FFFFFF</color>
+
+    <!-- Ondas (ripple) al pulsar, de más a menos visible -->
+    <color name="ripple_boton">#44FFFFFF</color>
+    <color name="ripple_claro">#40FFFFFF</color>
+    <color name="ripple_medio">#33FFFFFF</color>
+    <color name="ripple_suave">#26FFFFFF</color>
+
+    <!-- Velos oscuros del menú (mismo tono, distinta transparencia) -->
+    <color name="velo_oscuro">#7A171B24</color>
+    <color name="velo_fuerte">#E6171B24</color>
+    <color name="velo_medio">#66171B24</color>
+
+    <!-- Texto -->
+    <color name="texto_blanco">#FFFFFFFF</color>
+    <color name="texto_claro">#FFEDEFF2</color>
+    <color name="texto_tenue">#FFB6C0CC</color>
+    <color name="texto_gris">#FF8A93A0</color>
+    <color name="texto_pie">#FF7A8290</color>
+    <!-- el texto oscuro sobre fondos claros (#FF20232A) no está aquí sino en
+         Paleta.TEXTO_OSCURO, porque lo decide Paleta.textoSobre y DibujoCriatura no
+         tiene Context para leer colors.xml; texto_secundario_oscuro es ese mismo tono al 80 % -->
+    <color name="texto_error">#FFFF6B6B</color>
+    <!-- segunda línea de los botones de movimiento (tipo y PP), al 80 % -->
+    <color name="texto_secundario_oscuro">#CC20232A</color>
+    <color name="texto_secundario_claro">#CCEDEFF2</color>
+    <!-- sombra de los títulos grandes (negro al 50 %) -->
+    <color name="sombra_texto">#80000000</color>
+    <!-- degradado del título del menú, de izquierda a derecha -->
+    <color name="titulo_grad_1">#FFFFE3A3</color>
+    <color name="titulo_grad_2">#FF74C7FF</color>
+    <color name="titulo_grad_3">#FFFF8FB1</color>
+
+    <!-- Botones -->
+    <color name="boton_verde">#FF34C759</color>
+    <color name="boton_azul">#FF5865F2</color>
+    <color name="boton_gris">#FF4A5160</color>
+    <color name="boton_apagado">#FF3A4149</color>
+    <color name="boton_rojo">#FFE0442E</color>
+    <!-- botones de movimiento estilizados desde vistas/EstiloBotonMovimiento -->
+    <color name="boton_normal_luz">#FF8593AA</color>
+    <color name="boton_apagado_luz">#FF747B86</color>
+    <color name="boton_apagado_borde">#FF2B3038</color>
+
+    <!-- Inicio de sesión -->
+    <color name="campo_fondo">#1AFFFFFF</color>
+    <color name="campo_borde">#4DFFFFFF</color>
+
+    <!-- Selección de equipo -->
+    <color name="seleccion_borde">@color/boton_verde</color>
+    <color name="seleccion_fondo">#FF24352B</color>
+    <color name="slot_borde">#FF6E7681</color>
+    <color name="barra_fondo">@color/boton_apagado</color>
+    <color name="insignia_fondo">@color/boton_verde</color>
+    <!-- barra de vida entre el 50 % y el 20 % (verde por encima, rojo por debajo) -->
+    <color name="barra_vida_media">#FFF0A500</color>
+
+    <!-- Chat del combate -->
+    <color name="log_fondo">#FF1F232B</color>
+    <color name="burbuja_jugador">#FF2E4A8F</color>
+    <color name="burbuja_rival">#FF7A2E3A</color>
+    <color name="burbuja_neutral">#FF343A45</color>
+
+    <!-- Escenario del combate (vistas/Escenario.java). Los degradados del
+         cielo van de arriba a abajo; los halos terminan en el mismo color con
+         alfa 00 para fundirse con el cielo -->
+    <color name="cielo_manana_arriba">#FF6EB7F0</color>
+    <color name="cielo_manana_centro">#FFBFE9FF</color>
+    <color name="cielo_manana_abajo">#FFFFF1C7</color>
+    <color name="cielo_tarde_arriba">#FF47316F</color>
+    <color name="cielo_tarde_centro">#FFFF8A4C</color>
+    <color name="cielo_tarde_abajo">#FFFFD59A</color>
+    <color name="cielo_noche_arriba">#FF101827</color>
+    <color name="cielo_noche_centro">#FF26365C</color>
+    <color name="cielo_noche_abajo">#FF44536F</color>
+    <color name="sol">#FFFFE08A</color>
+    <color name="halo_sol">#99FFF0A6</color>
+    <color name="halo_sol_transparente">#00FFF0A6</color>
+    <color name="luna">#FFEAF2FF</color>
+    <!-- el cráter de la luna es un círculo del color del cielo nocturno desplazado -->
+    <color name="luna_crater">@color/cielo_noche_centro</color>
+    <color name="halo_luna">#88DDEBFF</color>
+    <color name="halo_luna_transparente">#00DDEBFF</color>
+    <!-- nubes blancas, de más cercana (más opaca) a más lejana -->
+    <color name="nube_cercana">#CCFFFFFF</color>
+    <color name="nube_media">#AAFFFFFF</color>
+    <color name="nube_lejana">#88FFFFFF</color>
+    <color name="colina_lejana">#664A8B5D</color>
+    <color name="colina_cercana">#885B9B63</color>
+    <!-- suelo: degradado de hierba clara (horizonte) a oscura (abajo), con una franja de borde -->
+    <color name="hierba_clara">#FF8BCF73</color>
+    <color name="hierba_oscura">#FF326B35</color>
+    <color name="hierba_borde">#FF9AD681</color>
+    <color name="mata_hierba">#AAE4F6B5</color>
+    <color name="plataforma_rival_sombra">#55283918</color>
+    <color name="plataforma_rival">#774C6B2E</color>
+    <color name="plataforma_jugador_sombra">#66283918</color>
+    <color name="plataforma_jugador">#88547734</color>
+    <!-- viñeta: negro al 33 % en los bordes que se funde a transparente en el centro -->
+    <color name="vineta_borde">#55000000</color>
+    <!-- velo gris azulado que oscurece la pantalla al perder (el alfa lo pone el código) -->
+    <color name="velo_derrota">#FF14161C</color>
+
+    <!-- Paneles de vida del combate (vistas/PanelCriatura.java) -->
+    <color name="panel_combate_fondo">#E6222733</color>
+    <color name="panel_combate_sombra">#44000000</color>
+    <!-- barra blanca translúcida que se queda un instante detrás cuando baja la vida -->
+    <color name="barra_fantasma">#AAFFFFFF</color>
+
+    <!-- Números flotantes de daño y curación (vistas/TextosFlotantes.java) -->
+    <color name="texto_dano_critico">#FFFFE66D</color>
+    <color name="texto_dano_eficaz">#FFFF8A4C</color>
+    <color name="texto_dano_poco_eficaz">#FFCBD2D9</color>
+    <!-- estrella amarilla clara de las partículas de crítico (vistas/Particulas.java) -->
+    <color name="particula_critico">#FFFFF19A</color>
+</resources>

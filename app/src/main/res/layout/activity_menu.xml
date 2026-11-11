@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Pantalla de inicio (MenuActivity). FrameLayout con tres capas: una
+  VistaBatalla sin batalla como telón (solo pinta el escenario según la hora),
+  un velo oscuro inferior (velo_menu_inferior) para que los botones lean bien
+  sobre la hierba, y encima el LinearLayout vertical con la fila de usuario
+  (saludo, estadísticas y botón de sesión), título, subtítulo, panel con las 6
+  criaturas, tres botones y pie.
+  Las VistaCriatura solo llevan tamaño e id; la criatura y la animación de
+  flotar se las pone MenuActivity. El View vacío con layout_weight="1" empuja
+  el pie hasta abajo. El telón es opaco, así que el fondo_menu solo va en
+  tools:background para la vista previa y no se pinta dos veces en el móvil.
+  El FrameLayout raíz tiene que ser un FrameLayout de verdad (no un <merge>)
+  porque apila las tres capas; por eso ignoro el aviso MergeRootFrame.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@drawable/fondo_menu"
+    tools:context=".pantallas.MenuActivity"
+    tools:ignore="MergeRootFrame">
+
+    <!-- Capa 1: el escenario de fondo -->
+    <com.juego.combates.vistas.VistaBatalla
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no" />
+
+    <!-- Capa 2: velo oscuro que va de transparente arriba a casi opaco abajo -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/velo_menu_inferior"
+        android:importantForAccessibility="no" />
+
+    <!-- Capa 3: el contenido del menú -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingStart="@dimen/margen_pantalla"
+        android:paddingEnd="@dimen/margen_pantalla"
+        android:paddingTop="20dp"
+        android:paddingBottom="@dimen/margen_pantalla">
+
+        <!-- Fila de usuario: "Hola, ana" + estadísticas al inicio, botón de sesión al final -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:baselineAligned="false"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/texto_usuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/texto_claro"
+                    android:textSize="@dimen/texto_normal"
+                    android:textStyle="bold"
+                    tools:text="Hola, ana_23" />
+
+                <TextView
+                    android:id="@+id/texto_estadisticas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/texto_tenue"
+                    android:textSize="@dimen/texto_pequeno"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    tools:text="🏆 8 · 💀 4" />
+            </LinearLayout>
+
+            <!-- Botón de contorno más pequeño que los normales: sin mínimos y con letra de ayuda -->
+            <Button
+                android:id="@+id/boton_sesion"
+                style="@style/BotonContorno"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textSize="@dimen/texto_ayuda"
+                android:stateListAnimator="@animator/boton_pulsado"
+                tools:text="Cerrar sesión" />
+        </LinearLayout>
+
+        <!-- Título y subtítulo sobre un velo oscuro: así se leen aunque el sol o la
+             luna del telón queden justo detrás -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:background="@drawable/velo_titulo"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="12dp">
+
+            <!-- Mismo título que el del login pero con la fuente sans-serif-black
+                 (ya es la más gruesa, no hace falta textStyle bold); el degradado
+                 de colores se lo pinta MenuActivity.prepararTitulo() -->
+            <TextView
+                android:id="@+id/texto_titulo_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/texto_blanco"
+                android:textSize="@dimen/texto_titulo"
+                android:fontFamily="sans-serif-black"
+                android:shadowColor="@color/sombra_texto"
+                android:shadowDx="0"
+                android:shadowDy="4"
+                android:shadowRadius="12"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dp"
+                android:text="@string/menu_subtitulo"
+                android:textColor="@color/texto_tenue"
+                android:textSize="@dimen/texto_subtitulo" />
+        </LinearLayout>
+
+        <!-- Panel translúcido con las seis criaturas flotando -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/panel_translucido"
+            android:paddingTop="18dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="40dp">
+
+            <com.juego.combates.vistas.VistaCriatura
+                android:id="@+id/criatura_0"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/tam_criatura_menu" />
+
+            <com.juego.combates.vistas.VistaCriatura
+                android:id="@+id/criatura_1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/tam_criatura_menu" />
+
+            <com.juego.combates.vistas.VistaCriatura
+                android:id="@+id/criatura_2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/tam_criatura_menu" />
+
+            <com.juego.combates.vistas.VistaCriatura
+                android:id="@+id/criatura_3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/tam_criatura_menu" />
+
+            <com.juego.combates.vistas.VistaCriatura
+                android:id="@+id/criatura_4"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/tam_criatura_menu" />
+
+            <com.juego.combates.vistas.VistaCriatura
+                android:id="@+id/criatura_5"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/tam_criatura_menu" />
+        </LinearLayout>
+
+        <!-- Los tres botones: dos primarios (verde y azul) y uno de contorno -->
+        <Button
+            android:id="@+id/boton_elegir"
+            style="@style/BotonPrimario"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/alto_boton"
+            android:layout_marginBottom="12dp"
+            android:text="@string/menu_elegir"
+            android:stateListAnimator="@animator/boton_pulsado"
+            android:backgroundTint="@color/boton_verde" />
+
+        <Button
+            android:id="@+id/boton_rapido"
+            style="@style/BotonPrimario"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/alto_boton"
+            android:layout_marginBottom="12dp"
+            android:text="@string/menu_rapido"
+            android:stateListAnimator="@animator/boton_pulsado"
+            android:backgroundTint="@color/boton_azul" />
+
+        <Button
+            android:id="@+id/boton_como_jugar"
+            style="@style/BotonContorno"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/alto_boton"
+            android:text="@string/menu_como_jugar"
+            android:stateListAnimator="@animator/boton_pulsado" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/menu_pie"
+            android:textColor="@color/texto_pie"
+            android:textSize="@dimen/texto_pequeno" />
+    </LinearLayout>
+</FrameLayout>

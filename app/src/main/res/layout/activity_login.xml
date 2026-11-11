@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Pantalla de inicio de sesión (LoginActivity), la LAUNCHER de la app.
+  Va dentro de un ScrollView para que al salir el teclado se pueda seguir
+  viendo el formulario. Mismo fondo degradado que el menú.
+
+  Arriba el título y una criatura grande de adorno. Luego el panel translúcido
+  con las dos pestañas (Entrar / Crear cuenta), los campos, el texto de error y
+  el botón principal con su ProgressBar encima. Debajo, el botón de contorno
+  para jugar sin cuenta.
+  Los campos de email, pregunta de seguridad y respuesta solo salen en la
+  pestaña "Crear cuenta"; el enlace "¿Has olvidado tu contraseña?" solo en
+  "Entrar". Todo eso lo enseña y esconde LoginActivity.aplicarModo().
+  Los EditText y los botones cogen su aspecto de los estilos CampoTexto,
+  BotonPrimario y BotonContorno (themes.xml); aquí solo va lo propio de cada uno.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_menu"
+    android:fillViewport="true"
+    tools:context=".pantallas.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingStart="@dimen/margen_pantalla"
+        android:paddingEnd="@dimen/margen_pantalla"
+        android:paddingTop="48dp"
+        android:paddingBottom="@dimen/margen_pantalla">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/texto_blanco"
+            android:textSize="@dimen/texto_titulo"
+            android:textStyle="bold"
+            android:letterSpacing="0.02"
+            android:shadowColor="@color/sombra_texto"
+            android:shadowDx="0"
+            android:shadowDy="4"
+            android:shadowRadius="12"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_subtitulo"
+            android:textColor="@color/texto_tenue"
+            android:textSize="@dimen/texto_subtitulo"
+            android:gravity="center"
+            android:paddingTop="6dp" />
+
+        <!-- Criatura grande de adorno; LoginActivity le pone una especie al azar y la deja flotando -->
+        <com.juego.combates.vistas.VistaCriatura
+            android:id="@+id/criatura_login"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp" />
+
+        <!-- Panel del formulario -->
+        <LinearLayout
+            android:id="@+id/panel_formulario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/panel_translucido"
+            android:padding="18dp">
+
+            <!-- Selector de dos pestañas hecho con dos botones más bajos y planos
+                 que los normales (letra de subtítulo y sin sombra). No son una
+                 barra de botones estándar, de ahí el tools:ignore. -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margen"
+                tools:ignore="ButtonStyle">
+
+                <Button
+                    android:id="@+id/pestana_entrar"
+                    style="@style/BotonPrimario"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="6dp"
+                    android:text="@string/login_pestana_entrar"
+                    android:textSize="@dimen/texto_subtitulo"
+                    android:elevation="0dp"
+                    android:backgroundTint="@color/boton_azul" />
+
+                <Button
+                    android:id="@+id/pestana_crear"
+                    style="@style/BotonContorno"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/login_pestana_crear"
+                    android:textSize="@dimen/texto_subtitulo" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/campo_usuario"
+                style="@style/CampoTexto"
+                android:hint="@string/login_hint_usuario"
+                android:inputType="text|textNoSuggestions"
+                android:maxLength="20"
+                android:imeOptions="actionNext"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="username" />
+
+            <EditText
+                android:id="@+id/campo_email"
+                style="@style/CampoTexto"
+                android:hint="@string/login_hint_email"
+                android:inputType="textEmailAddress"
+                android:maxLength="254"
+                android:imeOptions="actionNext"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"
+                android:autofillHints="emailAddress"
+                tools:visibility="visible" />
+
+            <!-- Contraseña con el botón del ojo encima, al final de la fila -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/alto_campo"
+                android:layout_marginBottom="10dp">
+
+                <!-- padding asimétrico a propósito: 16dp al inicio como los demás
+                     campos y 56dp al final para que el texto no se meta debajo del ojo -->
+                <EditText
+                    android:id="@+id/campo_password"
+                    style="@style/CampoTexto"
+                    android:layout_height="match_parent"
+                    android:hint="@string/login_hint_password"
+                    android:inputType="textPassword"
+                    android:maxLength="72"
+                    android:imeOptions="actionDone"
+                    android:paddingStart="@dimen/margen"
+                    android:paddingEnd="56dp"
+                    android:autofillHints="password" />
+
+                <Button
+                    android:id="@+id/boton_ver_password"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end|center_vertical"
+                    android:text="@string/login_ver_password"
+                    android:textSize="@dimen/texto_boton_grande"
+                    android:background="@android:color/transparent"
+                    android:alpha="0.6" />
+            </FrameLayout>
+
+            <!-- Solo al crear cuenta: pregunta de seguridad + respuesta -->
+            <TextView
+                android:id="@+id/etiqueta_pregunta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_pregunta_etiqueta"
+                android:textColor="@color/texto_tenue"
+                android:textSize="@dimen/texto_pequeno"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="6dp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <Spinner
+                android:id="@+id/spinner_pregunta"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/alto_campo"
+                android:background="@drawable/campo_texto"
+                android:popupBackground="@color/fondo_panel"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:listitem="@android:layout/simple_spinner_item" />
+
+            <EditText
+                android:id="@+id/campo_respuesta"
+                style="@style/CampoTexto"
+                android:hint="@string/login_hint_respuesta"
+                android:inputType="text|textNoSuggestions"
+                android:importantForAutofill="no"
+                android:maxLength="60"
+                android:imeOptions="actionDone"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <!-- el texto lo pone LoginActivity: login_reglas es una plantilla que
+                 se rellena con los límites de datos/Validador -->
+            <TextView
+                android:id="@+id/texto_reglas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_gris"
+                android:textSize="@dimen/texto_pequeno"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="Usuario: 3–20 letras, números o _ · Contraseña: 8–72 con letra y número" />
+
+            <!-- Solo al entrar: enlace a RecuperarActivity -->
+            <TextView
+                android:id="@+id/enlace_olvide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/login_olvide"
+                android:textColor="@color/texto_tenue"
+                android:textSize="@dimen/texto_ayuda"
+                android:padding="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/texto_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_error"
+                android:textSize="@dimen/texto_ayuda"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:paddingTop="2dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:text="Usuario o contraseña incorrectos." />
+
+            <!-- Botón principal con la ruedecita encima mientras carga -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/alto_boton"
+                android:layout_marginTop="14dp">
+
+                <Button
+                    android:id="@+id/boton_principal"
+                    style="@style/BotonPrimario"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/login_boton_entrar"
+                    android:backgroundTint="@color/boton_verde" />
+
+                <ProgressBar
+                    android:id="@+id/progreso_principal"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:elevation="8dp"
+                    android:indeterminateTint="@color/texto_blanco"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/boton_invitado"
+            style="@style/BotonContorno"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/alto_boton"
+            android:layout_marginTop="14dp"
+            android:text="@string/login_invitado" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/login_pie"
+            android:textColor="@color/texto_pie"
+            android:textSize="@dimen/texto_pequeno" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- La app no usa red, pero si se añade una conexión en el futuro no se
+     permitirán conexiones HTTP sin cifrar por accidente. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+</network-security-config>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Velo oscuro redondeado detrás del título del menú. Lo puse porque el sol o la
+  luna del telón (VistaBatalla) caen justo detrás de la palabra "Clash" y el
+  título con degradado dejaba de leerse; con este fondo el texto siempre
+  contrasta, sea la hora que sea.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/velo_oscuro" />
+    <corners android:radius="24dp" />
+</shape>

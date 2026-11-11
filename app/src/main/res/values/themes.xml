@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Tema de la app. Hereda de Theme.Material.NoActionBar (del SDK, no de AppCompat
+  porque no uso AndroidX) para que no salga la barra de título.
+  La barra de estado y la de navegación van del color del fondo para que la
+  pantalla parezca de una pieza.
+  Todos los AlertDialog usan el tema oscuro de abajo (alertDialogTheme).
+  Debajo van los estilos que quitan atributos repetidos de los layouts: los
+  campos de texto, los dos tipos de botón, el botón de movimiento del combate y
+  la fila de estadísticas de la tarjeta de selección; cada vista solo añade lo
+  suyo: id, texto, backgroundTint, stateListAnimator o el tools:text de la vista previa.
+-->
+<resources>
+    <style name="Theme.MonsterClash" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/fondo_oscuro</item>
+        <item name="android:colorAccent">@color/boton_verde</item>
+        <item name="android:colorPrimary">@color/fondo_panel</item>
+        <item name="android:colorPrimaryDark">@color/fondo_oscuro</item>
+        <item name="android:statusBarColor">@color/fondo_oscuro</item>
+        <item name="android:navigationBarColor">@color/fondo_oscuro</item>
+        <item name="android:alertDialogTheme">@style/Theme.MonsterClash.Dialogo</item>
+        <item name="android:dialogTheme">@style/Theme.MonsterClash.Dialogo</item>
+    </style>
+
+    <!-- Diálogos oscuros con las esquinas redondeadas -->
+    <style name="Theme.MonsterClash.Dialogo" parent="@android:style/Theme.Material.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/fondo_dialogo</item>
+        <item name="android:colorBackground">@color/fondo_panel</item>
+        <item name="android:colorAccent">@color/boton_verde</item>
+        <item name="android:textColorPrimary">@color/texto_blanco</item>
+        <item name="android:textColorSecondary">@color/texto_tenue</item>
+        <item name="android:textColor">@color/texto_claro</item>
+    </style>
+
+    <!--
+      Campo de texto (EditText) del login y de recuperar contraseña: cristal
+      oscuro con borde fino, una sola línea y 50dp de alto. El campo de la
+      contraseña sobrescribe paddingEnd (56dp) para dejar sitio al botón del ojo.
+    -->
+    <style name="CampoTexto">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/alto_campo</item>
+        <item name="android:background">@drawable/campo_texto</item>
+        <item name="android:textColor">@color/texto_blanco</item>
+        <item name="android:textColorHint">@color/texto_gris</item>
+        <item name="android:textSize">@dimen/texto_campo</item>
+        <item name="android:paddingStart">@dimen/margen</item>
+        <item name="android:paddingEnd">@dimen/margen</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <!--
+      Botón principal: fondo redondeado blanco que cada botón tiñe con su
+      backgroundTint (verde, azul, gris...), texto blanco en negrita y sombra.
+    -->
+    <style name="BotonPrimario">
+        <item name="android:background">@drawable/boton_redondeado</item>
+        <item name="android:textColor">@color/texto_blanco</item>
+        <item name="android:textSize">@dimen/texto_boton</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:elevation">6dp</item>
+    </style>
+
+    <!-- Botón secundario "fantasma": solo el contorno y texto claro, sin sombra. -->
+    <style name="BotonContorno">
+        <item name="android:background">@drawable/boton_contorno</item>
+        <item name="android:textColor">@color/texto_claro</item>
+        <item name="android:textSize">@dimen/texto_boton</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!--
+      Botón de movimiento del combate (los cuatro de activity_combate.xml): a
+      media anchura de su fila, dos líneas de letra normal (14sp), sombra de 3dp
+      y pulso al pulsar. El fondo gris de aquí es solo el de la vista previa:
+      vistas/EstiloBotonMovimiento lo sustituye en cada turno por el gradiente
+      del tipo del movimiento. No hereda de BotonPrimario porque casi todo cambia.
+    -->
+    <style name="BotonMovimiento">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:lines">2</item>
+        <item name="android:textColor">@color/texto_blanco</item>
+        <item name="android:textSize">@dimen/texto_normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:elevation">3dp</item>
+        <item name="android:stateListAnimator">@animator/boton_pulsado</item>
+        <item name="android:background">@drawable/boton_redondeado</item>
+        <item name="android:backgroundTint">@color/boton_gris</item>
+    </style>
+
+    <!--
+      Fila de estadística de la tarjeta de selección (item_criatura.xml): la
+      etiqueta "PS 175" a la izquierda con ancho fijo y la barra ocupando el
+      resto. SeleccionActivity pone el texto, el progreso y el color del relleno.
+    -->
+    <style name="EtiquetaStat">
+        <item name="android:layout_width">54dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/texto_tenue</item>
+        <item name="android:textSize">@dimen/texto_mini</item>
+    </style>
+
+    <!-- Hereda de la barra horizontal de Material, que es la que da ?android:attr/progressBarStyleHorizontal en este tema -->
+    <style name="BarraStat" parent="@android:style/Widget.Material.ProgressBar.Horizontal">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">7dp</item>
+        <item name="android:progressDrawable">@drawable/barra_stat</item>
+    </style>
+</resources>

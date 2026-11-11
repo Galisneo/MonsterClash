@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Medidas de los layouts. Tamaños en dp y textos en sp (sp respeta el tamaño
+  de letra configurado en el móvil).
+  Todos los tamaños de letra están aquí para tenerlos juntos y comparables;
+  los márgenes y paddings que solo salen en un sitio (un 6dp entre ranuras,
+  el 18dp de un panel...) los dejo escritos en el propio layout.
+-->
+<resources>
+    <!-- Márgenes y alturas -->
+    <!-- margen general entre bloques y hacia los bordes en selección y combate -->
+    <dimen name="margen">16dp</dimen>
+    <!-- padding lateral de las pantallas de menú y formularios (login y recuperar) -->
+    <dimen name="margen_pantalla">24dp</dimen>
+    <dimen name="alto_boton">56dp</dimen>
+    <dimen name="alto_boton_mov">64dp</dimen>
+    <!-- altura de los EditText (y del Spinner) del login y de recuperar contraseña -->
+    <dimen name="alto_campo">50dp</dimen>
+    <dimen name="alto_log">150dp</dimen>
+    <dimen name="tam_criatura_menu">60dp</dimen>
+    <dimen name="tam_criatura_tarjeta">84dp</dimen>
+    <dimen name="tam_criatura_dialogo">60dp</dimen>
+    <dimen name="tam_slot">54dp</dimen>
+    <!-- radio de las esquinas de boton_redondeado y boton_contorno -->
+    <dimen name="radio_boton">16dp</dimen>
+    <!-- botones de movimiento del combate, creados desde vistas/EstiloBotonMovimiento -->
+    <dimen name="radio_boton_mov">14dp</dimen>
+    <dimen name="borde_boton_mov">1dp</dimen>
+
+    <!-- Burbujas del chat del combate (vistas/ChatCombate.java) -->
+    <dimen name="chat_burbuja_padding_lateral">12dp</dimen>
+    <dimen name="chat_burbuja_padding_vertical">7dp</dimen>
+    <dimen name="chat_burbuja_margen_lateral">6dp</dimen>
+    <dimen name="chat_burbuja_margen_vertical">3dp</dimen>
+    <dimen name="chat_burbuja_ancho_maximo">290dp</dimen>
+    <!-- desde cuánto más abajo sube la burbuja al aparecer -->
+    <dimen name="chat_burbuja_subida">10dp</dimen>
+
+    <!-- Tamaños de letra: títulos -->
+    <dimen name="texto_titulo">36sp</dimen>
+    <!-- título de pantallas secundarias (recuperar contraseña) -->
+    <dimen name="texto_titulo_secundario">28sp</dimen>
+    <!-- título de la pantalla de selección -->
+    <dimen name="texto_titulo_pantalla">26sp</dimen>
+    <!-- "¡Victoria!" / "Derrota…" del diálogo de fin -->
+    <dimen name="texto_titulo_dialogo">24sp</dimen>
+    <!-- título del diálogo de cambio de criatura -->
+    <dimen name="texto_titulo_dialogo_equipo">21sp</dimen>
+    <!-- emoji del tipo como marca de agua detrás de la criatura en la tarjeta -->
+    <dimen name="texto_marca_agua">54sp</dimen>
+
+    <!-- Tamaños de letra: botones y campos -->
+    <!-- botón ¡Combatir! y el emoji del ojo de la contraseña -->
+    <dimen name="texto_boton_grande">18sp</dimen>
+    <dimen name="texto_boton">17sp</dimen>
+    <dimen name="texto_nombre">17sp</dimen>
+    <!-- nombre de la criatura en la tarjeta del diálogo de cambio -->
+    <dimen name="texto_nombre_dialogo">16sp</dimen>
+    <!-- texto de los EditText y de la pregunta de seguridad -->
+    <dimen name="texto_campo">16sp</dimen>
+
+    <!-- Tamaños de letra: texto corriente -->
+    <dimen name="texto_subtitulo">15sp</dimen>
+    <dimen name="texto_normal">14sp</dimen>
+    <!-- textos de ayuda, enlaces, mensajes de error y botón de sesión -->
+    <dimen name="texto_ayuda">13sp</dimen>
+    <dimen name="texto_pequeno">12sp</dimen>
+    <!-- etiquetas de las barras de estadísticas y lista de movimientos de la tarjeta -->
+    <dimen name="texto_mini">11sp</dimen>
+</resources>

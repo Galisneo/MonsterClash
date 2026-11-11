@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fondo de una tarjeta seleccionada: igual que tarjeta.xml pero con borde verde de 3dp. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/ripple_suave">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/seleccion_fondo" />
+            <corners android:radius="20dp" />
+            <stroke android:width="3dp" android:color="@color/seleccion_borde" />
+        </shape>
+    </item>
+</ripple>

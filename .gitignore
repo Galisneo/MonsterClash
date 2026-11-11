@@ -1,0 +1,34 @@
+# Archivos de Android Studio / IntelliJ: cada equipo tiene los suyos.
+*.iml
+.idea/
+captures/
+
+# Caché y salidas de Gradle: se regeneran al compilar.
+.gradle/
+build/
+app/build/
+.externalNativeBuild/
+.cxx/
+
+# Ruta del SDK de este PC (la escribe Android Studio en local.properties).
+local.properties
+
+# Paquetes compilados: el APK de cada versión va a la pestaña Releases de GitHub, no al repo.
+*.apk
+*.aab
+*.idsig
+
+# Toolchain del daemon de Gradle: lo genera Android Studio con una versión de JDK concreta
+# y solo estorba en otros equipos (el proyecto compila con cualquier JDK 17 o superior).
+gradle/gradle-daemon-jvm.properties
+
+# Clases compiladas y salida de las pruebas de consola (ver pruebas/README.md).
+pruebas/salida/
+
+# Volcados de memoria y registros que a veces deja Android Studio o la JVM.
+*.hprof
+*.log
+
+# Basura de los exploradores de archivos de macOS y Windows.
+.DS_Store
+Thumbs.db

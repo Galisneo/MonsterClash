@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Las cinco Activities de la app. LoginActivity es la LAUNCHER (por la que
+  arranca): si hay sesión guardada pasa sola al menú, y si no enseña el
+  formulario o deja jugar como invitado. RecuperarActivity es la de recuperar
+  la contraseña con la pregunta de seguridad. Las demás van con
+  exported="false" porque solo se abren desde dentro.
+  Todas en portrait. El configChanges evita que se recree la Activity al girar
+  o cambiar el tamaño de letra, porque no guardo el estado del combate.
+
+  Sin permisos: el login es 100% local (SQLite en el móvil), la app no habla
+  con nada de fuera ni genera tráfico de red.
+  La base de datos guarda los hashes de las contraseñas y de las respuestas de
+  seguridad, y no quiero que salga del móvil:
+  - allowBackup="false" quita la copia en la nube de Google y el adb backup
+    (y en Android 11 o menos, todo).
+  - dataExtractionRules (Android 12+): allowBackup="false" ya no basta ahí,
+    porque no impide la transferencia directa móvil-a-móvil al estrenar un
+    teléfono; con res/xml/reglas_extraccion.xml excluyo la base de datos y las
+    SharedPreferences también de esa transferencia.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Los dos avisos de lint que ignoro son decisiones tomadas a propósito:
+         LockedOrientationActivity, porque el juego va en vertical (portrait) y no
+         tiene sentido girarlo; DiscouragedApi, por el screenOrientation fijo que
+         eso conlleva. fullBackupContent="false" acompaña a allowBackup="false"
+         para Android 11 o menos, igual que dataExtractionRules para 12+. -->
+    <application
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.MonsterClash"
+        android:usesCleartextTraffic="false"
+        android:networkSecurityConfig="@xml/red_segura"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/reglas_extraccion"
+        android:supportsRtl="true"
+        tools:ignore="LockedOrientationActivity,DiscouragedApi">
+
+        <activity
+            android:name=".pantallas.LoginActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden|keyboard|navigation|uiMode|fontScale|density|locale|layoutDirection">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".pantallas.RecuperarActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden|keyboard|navigation|uiMode|fontScale|density|locale|layoutDirection" />
+
+        <activity
+            android:name=".pantallas.MenuActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden|keyboard|navigation|uiMode|fontScale|density|locale|layoutDirection" />
+
+        <activity
+            android:name=".pantallas.SeleccionActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden|keyboard|navigation|uiMode|fontScale|density|locale|layoutDirection" />
+
+        <activity
+            android:name=".pantallas.CombateActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden|keyboard|navigation|uiMode|fontScale|density|locale|layoutDirection" />
+    </application>
+
+</manifest>

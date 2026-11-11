@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Entrada corta desde la derecha para avanzar de pantalla. -->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="260"
+    android:fromXDelta="100%"
+    android:toXDelta="0%"
+    android:interpolator="@android:interpolator/fast_out_slow_in" />

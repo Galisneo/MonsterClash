@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Fondo redondeado de todos los botones, con efecto ripple (la onda blanca al
+  pulsar). El relleno es blanco a propósito: el color se lo pone cada botón con
+  backgroundTint (o setBackgroundTintList desde código), así me vale un solo archivo.
+  La máscara hace que la onda se recorte con las esquinas redondeadas.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/ripple_claro">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <corners android:radius="@dimen/radio_boton" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/white" />
+            <corners android:radius="@dimen/radio_boton" />
+        </shape>
+    </item>
+</ripple>

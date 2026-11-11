@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Reglas de extracción de datos (Android 12+, API 31). La base de datos guarda
+  los hashes de las contraseñas y de las respuestas de seguridad (estas de
+  poca entropía), así que la dejo fuera tanto de la copia en la nube como de
+  la transferencia directa móvil-a-móvil, que allowBackup="false" NO impide
+  en Android 12+ con targetSdk 31 o más. Las SharedPreferences (la sesión)
+  también fuera: en un móvil nuevo no debe aparecer nadie ya dentro.
+  path="." es la raíz del dominio, o sea, todo.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="database" path="." />
+        <exclude domain="sharedpref" path="." />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="database" path="." />
+        <exclude domain="sharedpref" path="." />
+    </device-transfer>
+</data-extraction-rules>
